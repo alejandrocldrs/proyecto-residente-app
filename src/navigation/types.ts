@@ -3,7 +3,12 @@ export type RootStackParamList = {
   Register: undefined;
   Home: undefined;
   Profile: undefined;
-  Topics: undefined;
+  // Quiz flow
+  Cuestionarios: undefined;
+  Submodules: { specialty: string };
+  Topics: { specialty: string; submodule?: string };
+  Quiz: { quizId: string };
+  // Other features (Phase 3+)
   Flashcards: undefined;
   Simulacros: undefined;
   Duels: undefined;

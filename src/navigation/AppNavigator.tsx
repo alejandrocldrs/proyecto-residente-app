@@ -8,11 +8,20 @@ import { RootStackParamList } from './types';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import HomeScreen from '../screens/HomeScreen';
-
-// Placeholder screen for features not yet implemented
+import CuestionariosScreen from '../screens/CuestionariosScreen';
+import SubmodulesScreen from '../screens/SubmodulesScreen';
+import TopicsScreen from '../screens/TopicsScreen';
+import QuizScreen from '../screens/QuizScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const screenOpts = {
+  headerStyle: { backgroundColor: '#1E293B' },
+  headerTintColor: '#F8FAFC',
+  headerTitleStyle: { fontWeight: '600' as const },
+  contentStyle: { backgroundColor: '#0F172A' },
+};
 
 export default function AppNavigator() {
   const { isAuthenticated, loadStoredAuth } = useAuthStore();
@@ -32,14 +41,7 @@ export default function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: { backgroundColor: '#1E293B' },
-          headerTintColor: '#F8FAFC',
-          headerTitleStyle: { fontWeight: '600' },
-          contentStyle: { backgroundColor: '#0F172A' },
-        }}
-      >
+      <Stack.Navigator screenOptions={screenOpts}>
         {!isAuthenticated ? (
           <>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
@@ -49,7 +51,12 @@ export default function AppNavigator() {
           <>
             <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Profile" component={PlaceholderScreen} options={{ title: 'Mi perfil' }} />
-            <Stack.Screen name="Topics" component={PlaceholderScreen} options={{ title: 'Cuestionarios' }} />
+            {/* Quiz flow */}
+            <Stack.Screen name="Cuestionarios" component={CuestionariosScreen} options={{ title: 'Cuestionarios' }} />
+            <Stack.Screen name="Submodules" component={SubmodulesScreen} options={({ route }) => ({ title: route.params.specialty })} />
+            <Stack.Screen name="Topics" component={TopicsScreen} options={({ route }) => ({ title: route.params.submodule ?? route.params.specialty })} />
+            <Stack.Screen name="Quiz" component={QuizScreen} options={{ title: 'Cuestionario', headerBackTitle: 'Temas' }} />
+            {/* Phase 3+ */}
             <Stack.Screen name="Flashcards" component={PlaceholderScreen} options={{ title: 'Flashcards' }} />
             <Stack.Screen name="Simulacros" component={PlaceholderScreen} options={{ title: 'Simulacros' }} />
             <Stack.Screen name="Duels" component={PlaceholderScreen} options={{ title: 'Duelos' }} />
