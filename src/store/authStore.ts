@@ -4,12 +4,15 @@ import api, { setAuthToken } from '../services/api';
 
 interface User {
   id: string;
-  username: string;
+  full_name: string;
   email: string;
-  gender?: string;
-  subscription_type?: string;
-  points?: number;
-  rank?: string;
+  gender: string;
+  is_admin: boolean;
+  is_approved: boolean;
+  profile_image: string | null;
+  universidad: string | null;
+  subscription_expires: string | null;
+  account_type: string; // 'trial' | 'premium' | 'free'
 }
 
 interface AuthState {
@@ -24,11 +27,16 @@ interface AuthState {
 }
 
 interface RegisterData {
-  username: string;
+  full_name: string;
   email: string;
   password: string;
   gender: string;
 }
+
+const fetchCurrentUser = async (): Promise<User> => {
+  const response = await api.get('/api/auth/me');
+  return response.data;
+};
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
@@ -53,9 +61,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   login: async (email, password) => {
     set({ isLoading: true });
     try {
-      const response = await api.post('/api/auth/login', { email, password });
-      const { token, user } = response.data;
+      const loginRes = await api.post('/api/auth/login', { email, password });
+      const token: string = loginRes.data.access_token;
       setAuthToken(token);
+      const user = await fetchCurrentUser();
       await SecureStore.setItemAsync('auth_token', token);
       await SecureStore.setItemAsync('user_data', JSON.stringify(user));
       set({ token, user, isAuthenticated: true, isLoading: false });
@@ -68,9 +77,15 @@ export const useAuthStore = create<AuthState>((set) => ({
   register: async (data) => {
     set({ isLoading: true });
     try {
-      const response = await api.post('/api/auth/register', data);
-      const { token, user } = response.data;
+      await api.post('/api/auth/register', data);
+      // Register doesn't return a token — login immediately after
+      const loginRes = await api.post('/api/auth/login', {
+        email: data.email,
+        password: data.password,
+      });
+      const token: string = loginRes.data.access_token;
       setAuthToken(token);
+      const user = await fetchCurrentUser();
       await SecureStore.setItemAsync('auth_token', token);
       await SecureStore.setItemAsync('user_data', JSON.stringify(user));
       set({ token, user, isAuthenticated: true, isLoading: false });

@@ -39,7 +39,7 @@ export default function HomeScreen({ navigation }: any) {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>¡Hola, {user?.username ?? 'Residente'}! 👋</Text>
+            <Text style={styles.greeting}>¡Hola, {user?.full_name?.split(' ')[0] ?? 'Residente'}! 👋</Text>
             <Text style={styles.subgreeting}>¿Listo para estudiar hoy?</Text>
           </View>
           <TouchableOpacity onPress={() => navigation.navigate('Profile')} style={styles.avatarButton}>
@@ -52,18 +52,18 @@ export default function HomeScreen({ navigation }: any) {
         {/* Points / Rank bar */}
         <View style={styles.statsCard}>
           <View style={styles.statItem}>
-            <Text style={styles.statValue}>{user?.points ?? 0}</Text>
-            <Text style={styles.statLabel}>Puntos</Text>
+            <Text style={styles.statValue}>{user?.account_type === 'trial' ? '72h gratis' : user?.account_type ?? 'Free'}</Text>
+            <Text style={styles.statLabel}>Acceso</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statValue}>{user?.rank ?? 'Estudiante'}</Text>
-            <Text style={styles.statLabel}>Rango</Text>
+            <Text style={styles.statValue}>{user?.is_approved ? 'Activo' : 'Pendiente'}</Text>
+            <Text style={styles.statLabel}>Estado</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statValue}>{user?.subscription_type ?? 'Free'}</Text>
-            <Text style={styles.statLabel}>Plan</Text>
+            <Text style={styles.statValue}>{user?.universidad ?? '—'}</Text>
+            <Text style={styles.statLabel}>Universidad</Text>
           </View>
         </View>
 

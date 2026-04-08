@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-// TODO: Replace with deployed backend URL once backend is hosted
-// During development, if running backend locally: 'http://localhost:8001'
-export const API_BASE_URL = 'https://your-backend-url.com';
+export const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? 'https://landing-residente.emergent.host';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

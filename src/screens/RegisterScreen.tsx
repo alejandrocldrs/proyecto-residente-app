@@ -20,19 +20,19 @@ type Props = {
 };
 
 export default function RegisterScreen({ navigation }: Props) {
-  const [username, setUsername] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const { register, isLoading } = useAuthStore();
 
   const handleRegister = async () => {
-    if (!username || !email || !password || !gender) {
+    if (!fullName || !email || !password || !gender) {
       Alert.alert('Error', 'Por favor completa todos los campos');
       return;
     }
     try {
-      await register({ username, email, password, gender });
+      await register({ full_name: fullName, email, password, gender });
     } catch {
       Alert.alert('Error', 'No se pudo crear la cuenta. Intenta con otro correo.');
     }
@@ -49,11 +49,11 @@ export default function RegisterScreen({ navigation }: Props) {
 
         <TextInput
           style={styles.input}
-          placeholder="Nombre de usuario"
+          placeholder="Nombre completo"
           placeholderTextColor="#9CA3AF"
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
+          value={fullName}
+          onChangeText={setFullName}
+          autoCapitalize="words"
           autoCorrect={false}
         />
         <TextInput
