@@ -33,8 +33,12 @@ export default function RegisterScreen({ navigation }: Props) {
     }
     try {
       await register({ full_name: fullName, email, password, gender });
-    } catch {
-      Alert.alert('Error', 'No se pudo crear la cuenta. Intenta con otro correo.');
+    } catch (err: any) {
+      const detail = err?.response?.data?.detail ?? err?.message ?? 'Error desconocido';
+      const message = Array.isArray(detail)
+        ? detail.map((d: any) => d.msg).join(', ')
+        : String(detail);
+      Alert.alert('Error al registrar', message);
     }
   };
 

@@ -31,8 +31,9 @@ export default function LoginScreen({ navigation }: Props) {
     }
     try {
       await login(email, password);
-    } catch {
-      Alert.alert('Error', 'Correo o contraseña incorrectos');
+    } catch (err: any) {
+      const detail = err?.response?.data?.detail ?? err?.message ?? 'Error desconocido';
+      Alert.alert('Error al iniciar sesión', String(detail));
     }
   };
 
