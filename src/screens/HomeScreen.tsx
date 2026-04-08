@@ -18,7 +18,7 @@ interface FeatureCard {
 }
 
 const features: FeatureCard[] = [
-  { title: 'Cuestionarios', description: 'Practica por tema y especialidad', emoji: '📚', screen: 'Topics', color: '#4F46E5' },
+  { title: 'Cuestionarios', description: 'Practica por tema y especialidad', emoji: '📚', screen: 'Cuestionarios', color: '#4F46E5' },
   { title: 'Flashcards', description: 'Repasa conceptos clave', emoji: '🃏', screen: 'Flashcards', color: '#7C3AED' },
   { title: 'Simulacros', description: 'Exámenes tipo ENARM', emoji: '📝', screen: 'Simulacros', color: '#0891B2' },
   { title: 'Duelos', description: 'Compite contra otros', emoji: '⚔️', screen: 'Duels', color: '#DC2626' },
