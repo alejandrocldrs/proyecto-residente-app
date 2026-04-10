@@ -19,6 +19,10 @@ import FlashcardDecksScreen from '../screens/FlashcardDecksScreen';
 import FlashcardViewerScreen from '../screens/FlashcardViewerScreen';
 import SimulacrosScreen from '../screens/SimulacrosScreen';
 import SimulacroExamScreen from '../screens/SimulacroExamScreen';
+import DuelsScreen from '../screens/DuelsScreen';
+import DuelGameScreen from '../screens/DuelGameScreen';
+import LeaderboardScreen from '../screens/LeaderboardScreen';
+import JournalScreen from '../screens/JournalScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -70,14 +74,15 @@ export default function AppNavigator() {
             {/* Simulacros flow */}
             <Stack.Screen name="Simulacros" component={SimulacrosScreen} options={{ title: 'Simulacros' }} />
             <Stack.Screen name="SimulacroExam" component={SimulacroExamScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Duels" component={PlaceholderScreen} options={{ title: 'Duelos' }} />
+            <Stack.Screen name="Duels" component={DuelsScreen} options={{ title: 'Duelos' }} />
+            <Stack.Screen name="DuelGame" component={DuelGameScreen} options={{ headerShown: false }} />
             <Stack.Screen name="ImagenDX" component={PlaceholderScreen} options={{ title: 'ImagenDX' }} />
             <Stack.Screen name="Planner" component={PlaceholderScreen} options={{ title: 'Planificador' }} />
             <Stack.Screen name="Perlas" component={PlaceholderScreen} options={{ title: 'Perlas Diarias' }} />
             <Stack.Screen name="Presentaciones" component={PlaceholderScreen} options={{ title: 'Presentaciones' }} />
-            <Stack.Screen name="Leaderboard" component={PlaceholderScreen} options={{ title: 'Ranking' }} />
+            <Stack.Screen name="Leaderboard" component={LeaderboardScreen} options={{ title: 'Ranking' }} />
             <Stack.Screen name="CaminoDelMedico" component={PlaceholderScreen} options={{ title: 'Camino del Médico' }} />
-            <Stack.Screen name="Journal" component={PlaceholderScreen} options={{ title: 'Journal del Día' }} />
+            <Stack.Screen name="Journal" component={JournalScreen} options={{ title: 'Journal del Día' }} />
             <Stack.Screen name="Support" component={PlaceholderScreen} options={{ title: 'Soporte' }} />
           </>
         )}

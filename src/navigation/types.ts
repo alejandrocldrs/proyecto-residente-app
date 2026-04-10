@@ -17,6 +17,7 @@ export type RootStackParamList = {
   Simulacros: undefined;
   SimulacroExam: { simulacroId: string; viewResults: boolean };
   Duels: undefined;
+  DuelGame: { duelId: string; opponentName: string; opponentImage?: string };
   ImagenDX: undefined;
   Planner: undefined;
   Perlas: undefined;
