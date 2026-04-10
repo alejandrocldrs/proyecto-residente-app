@@ -13,6 +13,12 @@ import SubmodulesScreen from '../screens/SubmodulesScreen';
 import TopicsScreen from '../screens/TopicsScreen';
 import QuizScreen from '../screens/QuizScreen';
 import PlaceholderScreen from '../screens/PlaceholderScreen';
+import FlashcardsScreen from '../screens/FlashcardsScreen';
+import FlashcardTopicsScreen from '../screens/FlashcardTopicsScreen';
+import FlashcardDecksScreen from '../screens/FlashcardDecksScreen';
+import FlashcardViewerScreen from '../screens/FlashcardViewerScreen';
+import SimulacrosScreen from '../screens/SimulacrosScreen';
+import SimulacroExamScreen from '../screens/SimulacroExamScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -56,9 +62,14 @@ export default function AppNavigator() {
             <Stack.Screen name="Submodules" component={SubmodulesScreen} options={({ route }) => ({ title: route.params.specialty })} />
             <Stack.Screen name="Topics" component={TopicsScreen} options={({ route }) => ({ title: route.params.submodule ?? route.params.specialty })} />
             <Stack.Screen name="Quiz" component={QuizScreen} options={{ title: 'Cuestionario', headerBackTitle: 'Temas' }} />
-            {/* Phase 3+ */}
-            <Stack.Screen name="Flashcards" component={PlaceholderScreen} options={{ title: 'Flashcards' }} />
-            <Stack.Screen name="Simulacros" component={PlaceholderScreen} options={{ title: 'Simulacros' }} />
+            {/* Flashcard flow */}
+            <Stack.Screen name="Flashcards" component={FlashcardsScreen} options={{ title: 'Flashcards' }} />
+            <Stack.Screen name="FlashcardTopics" component={FlashcardTopicsScreen} options={({ route }) => ({ title: route.params.specialty })} />
+            <Stack.Screen name="FlashcardDecks" component={FlashcardDecksScreen} options={({ route }) => ({ title: route.params.topic })} />
+            <Stack.Screen name="FlashcardViewer" component={FlashcardViewerScreen} options={{ title: 'Visor de Flashcards', headerShown: false }} />
+            {/* Simulacros flow */}
+            <Stack.Screen name="Simulacros" component={SimulacrosScreen} options={{ title: 'Simulacros' }} />
+            <Stack.Screen name="SimulacroExam" component={SimulacroExamScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Duels" component={PlaceholderScreen} options={{ title: 'Duelos' }} />
             <Stack.Screen name="ImagenDX" component={PlaceholderScreen} options={{ title: 'ImagenDX' }} />
             <Stack.Screen name="Planner" component={PlaceholderScreen} options={{ title: 'Planificador' }} />

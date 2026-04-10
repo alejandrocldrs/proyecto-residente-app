@@ -8,9 +8,14 @@ export type RootStackParamList = {
   Submodules: { specialty: string };
   Topics: { specialty: string; submodule?: string };
   Quiz: { quizId: string };
-  // Other features (Phase 3+)
+  // Flashcard flow
   Flashcards: undefined;
+  FlashcardTopics: { specialty: string };
+  FlashcardDecks: { specialty: string; topic: string };
+  FlashcardViewer: { specialty: string; topic: string; deckName: string };
+  // Simulacros flow
   Simulacros: undefined;
+  SimulacroExam: { simulacroId: string; viewResults: boolean };
   Duels: undefined;
   ImagenDX: undefined;
   Planner: undefined;
